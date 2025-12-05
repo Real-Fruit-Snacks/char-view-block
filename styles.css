@@ -1,0 +1,179 @@
+/* Outer block (title + wrapper) */
+.charview-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 4px 0;
+  /* default CSS variables (overridden by inline styles on each block) */
+  --char-num-color: #2ecc71;
+  --char-upper-color: #e74c3c;
+  --char-lower-color: #3498db;
+  --char-symbol-color: #9b59b6;
+  --char-space-color: #7f8c8d;
+  --char-title-font-size: 0.8rem;
+}
+
+/* Title above the grid */
+.charview-title {
+  font-size: var(--char-title-font-size);
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+  /* text-transform controlled from JS (titleUppercase setting) */
+}
+
+/* Color Key Section */
+.charview-color-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 0.85em;
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+}
+
+.charview-key-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.charview-key-color {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.charview-key-label {
+  white-space: nowrap;
+}
+
+/* Wrapper around all lines of characters */
+.charview-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background-color: var(--background-secondary);
+  font-family: var(--font-monospace);
+}
+
+/* Each logical input line */
+.charview-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Individual character boxes */
+.charview-char {
+  min-width: 1.4em;
+  min-height: 1.4em;
+  padding: 2px 4px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1.2;
+  box-sizing: border-box;
+  border: 1px solid var(--background-modifier-border);
+  background-color: rgba(255, 255, 255, 0.02);
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect to make tooltips more discoverable */
+.charview-char:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-color: currentColor;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Character type colors use block-level CSS variables */
+.char-num {
+  color: var(--char-num-color, #2ecc71);
+}
+
+.char-upper {
+  color: var(--char-upper-color, #e74c3c);
+}
+
+.char-lower {
+  color: var(--char-lower-color, #3498db);
+}
+
+.char-symbol {
+  color: var(--char-symbol-color, #9b59b6);
+}
+
+/* Space boxes use the space color variable (also can show symbol via JS) */
+.char-space {
+  color: var(--char-space-color, #7f8c8d);
+  opacity: 0.9;
+}
+
+/* Empty line marker (␤) */
+.char-empty {
+  opacity: 0.6;
+}
+
+/* Statistics Section */
+.charview-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 0.85em;
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+}
+
+.charview-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.charview-stat-item span:last-child {
+  font-weight: bold;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .charview-color-key {
+    font-size: 0.8em;
+    gap: 8px;
+  }
+
+  .charview-stats {
+    font-size: 0.8em;
+    gap: 10px;
+  }
+
+  .charview-char {
+    min-width: 1.2em;
+    min-height: 1.2em;
+  }
+}
+
+/* Print styles */
+@media print {
+  .charview-char:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .charview-block {
+    break-inside: avoid;
+  }
+}
